@@ -17,15 +17,16 @@ public class Persona implements Serializable{
 	
 	
 	
-    private String cedula, nombre,apellido,telefono,direccion;
+    private String cedula, nombre,apellido,telefono,direccion,tipo;
 
-    public Persona(int personaid, String cedula, String nombre, String apellido, String telefono, String direccion) {
+    public Persona(int personaid, String cedula, String nombre, String apellido, String telefono, String direccion, String tipo) {
         this.personaid = personaid;
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.tipo= tipo;
     }
     
     public Persona() {
@@ -79,10 +80,22 @@ public class Persona implements Serializable{
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
 
-    @Override
-    public String toString() {
-        return "Persona{" + "personaid=" + personaid + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", direccion=" + direccion + '}';
-    }
+    public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [personaid=" + personaid + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", telefono=" + telefono + ", direccion=" + direccion + ", tipo=" + tipo + "]";
+	}
+
+	
 
 }
