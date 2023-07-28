@@ -19,7 +19,7 @@ public class Usuario implements Serializable{
     private int UsuarioId;
 	
 	
-	private String cargo, usuario, contraseña;
+	private String cargo, usuario, contrasenia;
 	
 	
 	//agregar relacion uno a uno
@@ -38,11 +38,11 @@ public class Usuario implements Serializable{
 	}
 
 
-	public Usuario(int usuarioId, String cargo, String usuario, String contraseña) {
+	public Usuario(int usuarioId, String cargo, String usuario, String contrasenia) {
 		UsuarioId = usuarioId;
 		this.cargo = cargo;
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasenia = contrasenia;
 	}
 
 
@@ -84,22 +84,25 @@ public class Usuario implements Serializable{
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
-	
 
 
 	@Override
 	public String toString() {
-		return "Usuario [UsuarioId=" + UsuarioId + ", cargo=" + cargo + ", usuario=" + usuario + ", contraseña="
-				+ contraseña + ", persona=" + persona + "]";
+		return "Usuario [UsuarioId=" + UsuarioId + ", cargo=" + cargo + ", usuario=" + usuario + ", contrasenia="
+				+ contrasenia + ", persona=" + persona + "]";
 	}
+	
+
+
+	
 	
 	
 	

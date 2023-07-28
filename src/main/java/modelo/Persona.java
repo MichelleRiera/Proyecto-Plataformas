@@ -16,14 +16,13 @@ public class Persona implements Serializable {
     @Column(name = "personas_id")
     private int personaid;
 
-    private String cedula, nombre, apellido, telefono, direccion, tipo;
+    private String cedula, nombre, telefono, direccion, tipo;
 
-    public Persona(int personaid, String cedula, String nombre, String apellido, String telefono, String direccion,
+    public Persona(int personaid, String cedula, String nombre,String telefono, String direccion,
             String tipo) {
         this.personaid = personaid;
         this.cedula = cedula;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.telefono = telefono;
         this.direccion = direccion;
         setTipo(tipo); // Usa el método setter para asegurar la validación del campo "tipo"
@@ -57,13 +56,7 @@ public class Persona implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+  
 
     public String getTelefono() {
         return telefono;
@@ -96,7 +89,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona [personaid=" + personaid + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+        return "Persona [personaid=" + personaid + ", cedula=" + cedula + ", nombre=" + nombre 
                 + ", telefono=" + telefono + ", direccion=" + direccion + ", tipo=" + tipo + "]";
     }
 }

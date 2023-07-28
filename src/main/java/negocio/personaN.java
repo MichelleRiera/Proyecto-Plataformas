@@ -60,7 +60,7 @@ public class personaN {
 	    public void delete(String cedula) {
 	        daoPersona.delete(cedula);
 	    }
-	    public void actualizarClientePorCedula(String cedula, String nombre, String apellido, String direccion, String telefono) throws Exception {
+	    public void actualizarClientePorCedula(String cedula, String nombre,  String direccion, String telefono) throws Exception {
 	        if (!isCedulaValida(cedula)) {
 	            throw new Exception("Cedula incorrecta");
 	        }
@@ -71,7 +71,6 @@ public class personaN {
 	        }
 
 	        personaExistente.setNombre(nombre);
-	        personaExistente.setApellido(apellido);
 	        personaExistente.setDireccion(direccion);
 	        personaExistente.setTelefono(telefono);
 

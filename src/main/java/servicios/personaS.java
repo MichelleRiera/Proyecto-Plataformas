@@ -24,8 +24,6 @@ public class personaS {
 	@Inject
 	private personaN clientes;
 	
-	private List<Persona> personas = new ArrayList<>();
-	
 	@GET
     @Path("listarPersonas")
     @Produces("application/json")
@@ -86,8 +84,8 @@ public class personaS {
     @Produces("application/json")
     public Response actualizarClientePorCedula(Persona persona) {
         try {
-            clientes.actualizarClientePorCedula(persona.getCedula(), persona.getNombre(), persona.getApellido(),
-                    persona.getDireccion(), persona.getTelefono());
+            clientes.actualizarClientePorCedula(persona.getCedula(), persona.getNombre(), 
+            persona.getDireccion(), persona.getTelefono());
 
             return Response.status(Response.Status.OK).entity(persona).build();
         } catch (Exception e) {

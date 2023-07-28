@@ -91,7 +91,7 @@ public class usuarioS {
     @Produces("application/json")
     public Response loginUsuario(Usuario usuario) {
         try {
-            Usuario usuarioLogueado = negocioUsuario.login(usuario.getUsuario(), usuario.getContraseña());
+            Usuario usuarioLogueado = negocioUsuario.login(usuario.getUsuario(), usuario.getContrasenia());
             if (usuarioLogueado != null) {
                 String mensajeBienvenida = "¡Bienvenido, " + usuarioLogueado.getUsuario() + "!";
                 return Response.status(Response.Status.OK).entity(mensajeBienvenida).build();

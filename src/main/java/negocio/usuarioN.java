@@ -43,7 +43,7 @@ public class usuarioN {
 
 	        // Actualizar los campos del usuarioExistente con los nuevos valores de usuario
 	        usuarioExistente.setCargo(usuario.getCargo());
-	        usuarioExistente.setContraseña(usuario.getContraseña());
+	        usuarioExistente.setContrasenia(usuario.getContrasenia());
 
 	        // Guardar los cambios en la base de datos utilizando el método update del daoUsuario
 	        daoUsuario.update(usuarioExistente);
@@ -68,14 +68,14 @@ public class usuarioN {
 	        return daoUsuario.getAll();
 	    }
 	    
-	    public Usuario login(String nombreUsuario, String contraseña) throws Exception {
-	        if (nombreUsuario == null || nombreUsuario.isEmpty() || contraseña == null || contraseña.isEmpty()) {
+	    public Usuario login(String nombreUsuario, String contrasenia) throws Exception {
+	        if (nombreUsuario == null || nombreUsuario.isEmpty() || contrasenia == null || contrasenia.isEmpty()) {
 	            throw new Exception("Debe proporcionar un nombre de usuario y una contraseña válida para iniciar sesión.");
 	        }
 
 	        Usuario usuario = daoUsuario.getByNombreUsuario(nombreUsuario);
 
-	        if (usuario == null || !usuario.getContraseña().equals(contraseña)) {
+	        if (usuario == null || !usuario.getContrasenia().equals(contrasenia)) {
 	            throw new Exception("Credenciales de inicio de sesión inválidas.");
 	        }
 
