@@ -11,6 +11,11 @@ import jakarta.persistence.Id;
 @Entity
 public class Vehiculo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "vehiculo_id")

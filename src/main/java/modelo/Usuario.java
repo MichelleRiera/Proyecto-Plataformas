@@ -66,8 +66,12 @@ public class Usuario implements Serializable{
 
 
 	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
+        if ("A".equalsIgnoreCase(cargo) || "G".equalsIgnoreCase(cargo)) {
+            this.cargo = cargo.toUpperCase(); // Convertir a mayúsculas por convención.
+        } else {
+            throw new IllegalArgumentException("El valor del cargo debe ser 'A' (Administrador) o 'G' (General).");
+        }
+    }
 
 
 	public String getUsuario() {
@@ -88,6 +92,7 @@ public class Usuario implements Serializable{
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+	
 
 
 	@Override
