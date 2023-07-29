@@ -93,8 +93,8 @@ public class usuarioS {
         try {
             Usuario usuarioLogueado = negocioUsuario.login(usuario.getUsuario(), usuario.getContrasenia());
             if (usuarioLogueado != null) {
-                String mensajeBienvenida = "¡Bienvenido, " + usuarioLogueado.getUsuario() + "!";
-                return Response.status(Response.Status.OK).entity(mensajeBienvenida).build();
+                //String mensajeBienvenida = "¡Bienvenido, " + usuarioLogueado.getUsuario() + "!";
+                return Response.status(Response.Status.OK).entity(usuarioLogueado).build();
             } else {
                 Error respuesta = new Error();
                 respuesta.setCodigo(99);
