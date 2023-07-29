@@ -10,25 +10,31 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Lugar implements Serializable{
+	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "lugar_id")
 	private int lugarId;
 	
-	private int numeroPiso, numeroLugar;
+	private int numeroLugar;
 	
 	private String estado;
+	
+	@OneToOne
+    @JoinColumn(name = "Piso_id")
+    private Piso piso;
 	
     @OneToMany
 	@JoinColumn(name = "tarifa_id")
 	private Set<Ticket> ticket;
 
-	public Lugar(int lugarId, int numeroPiso, int numeroLugar, String estado) {
+	public Lugar(int lugarId,int numeroLugar, String estado) {
 		this.lugarId = lugarId;
-		this.numeroPiso = numeroPiso;
 		this.numeroLugar = numeroLugar;
 		this.estado = estado;
 	}
@@ -44,13 +50,6 @@ public class Lugar implements Serializable{
 		this.lugarId = lugarId;
 	}
 
-	public int getNumeroPiso() {
-		return numeroPiso;
-	}
-
-	public void setNumeroPiso(int numeroPiso) {
-		this.numeroPiso = numeroPiso;
-	}
 
 	public int getNumeroLugar() {
 		return numeroLugar;
@@ -76,11 +75,21 @@ public class Lugar implements Serializable{
 		this.ticket = ticket;
 	}
 
+	public Piso getPiso() {
+		return piso;
+	}
+
+	public void setPiso(Piso piso) {
+		this.piso = piso;
+	}
+
 	@Override
 	public String toString() {
-		return "Lugar [lugarId=" + lugarId + ", numeroPiso=" + numeroPiso + ", numeroLugar=" + numeroLugar + ", estado="
-				+ estado + ", ticket=" + ticket + "]";
+		return "Lugar [lugarId=" + lugarId + ", numeroLugar=" + numeroLugar + ", estado=" + estado + ", piso=" + piso
+				+ ", ticket=" + ticket + "]";
 	}
+
+	
 	
 	
 	

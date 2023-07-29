@@ -3,17 +3,22 @@ package DAO;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import modelo.Vehiculo;
 
+
+@Stateless
 public class vehiculoDao implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -40,5 +45,16 @@ public class vehiculoDao implements Serializable{
 		Query q = em.createQuery(jpql);
 		return q.getResultList();
 	}
+	public Vehiculo getByPlaca(String placa) {
+	    String jpql = "SELECT v FROM Vehiculo v WHERE v.placa = :placa";
+	    Query q = em.createQuery(jpql);
+	    q.setParameter("placa", placa);
+	    try {
+	        return (Vehiculo) q.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
+	}
+
 
 }

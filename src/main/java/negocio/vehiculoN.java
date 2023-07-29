@@ -6,39 +6,44 @@ import java.util.List;
 
 import DAO.vehiculoDao;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 @Stateless
 public class vehiculoN {
 	 /**
      * 
      */
-    private static final long serialVersionUID = 1L;
-
+ 
+	@Inject
     private vehiculoDao vehiculoDao;
 
-    public vehiculoN() {
-        vehiculoDao = new vehiculoDao();
-    }
+   
 
     public void guardarVehiculo(Vehiculo vehiculo) {
         vehiculoDao.insert(vehiculo);
     }
 
-    public void actualizarVehiculo(Vehiculo vehiculo) {
-        Vehiculo vehiculoExistente = vehiculoDao.read(vehiculo.getVehiculoId());
+    public void actualizarVehiculo(String placa, Vehiculo vehiculoActualizado) {
+        Vehiculo vehiculoExistente = vehiculoDao.getByPlaca(placa);
+
         if (vehiculoExistente == null) {
             // El vehículo no existe en la base de datos.
-            throw new IllegalArgumentException("No se encontró el vehículo con el ID: " + vehiculo.getVehiculoId());
+            throw new IllegalArgumentException("No se encontró ningún vehículo con la placa: " + placa);
         } else {
-            if (vehiculo.getPlaca() == null || vehiculo.getPlaca().isEmpty()) {
+            if (vehiculoActualizado.getPlaca() == null || vehiculoActualizado.getPlaca().isEmpty()) {
                 // La placa no puede ser nula o vacía.
                 throw new IllegalArgumentException("La placa del vehículo no puede ser nula o vacía.");
             }
-            vehiculoExistente.setPlaca(vehiculo.getPlaca());
-            vehiculoExistente.setTipoVehiculo(vehiculo.getTipoVehiculo());
+            
+            // Actualizar los datos del vehículo existente con los datos del vehículo actualizado.
+            vehiculoExistente.setPlaca(vehiculoActualizado.getPlaca());
+            vehiculoExistente.setTipoVehiculo(vehiculoActualizado.getTipoVehiculo());
+
+            // Realizar la actualización en la base de datos.
             vehiculoDao.update(vehiculoExistente);
         }
     }
+
 
     public void eliminarVehiculoPorPlaca(String placa) {
         List<Vehiculo> vehiculos = vehiculoDao.getAll();

@@ -3,12 +3,13 @@ package DAO;
 import java.io.Serializable;
 import java.util.List;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import modelo.Lugar;
 
-
+@Stateless
 public class lugarDao implements Serializable{
 
 	/**
