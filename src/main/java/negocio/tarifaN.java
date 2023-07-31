@@ -20,7 +20,7 @@ public class tarifaN {
 	        tarifaDao.insert(tarifa);
 	    }
 
-	    public void actualizarTarifaPorId(int tarifaId, int nuevoCosto, String nuevoTipoVehiculo) {
+	    public void actualizarTarifaPorId(int tarifaId, float nuevoCosto, String nuevoTipoVehiculo) {
 	        if (nuevoCosto <= 0) {
 	            throw new IllegalArgumentException("El costo de la tarifa debe ser mayor que cero.");
 	        }

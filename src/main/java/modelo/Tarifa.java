@@ -21,14 +21,12 @@ public class Tarifa implements Serializable{
 		private int tarifaId;
 		
 		
-	    private int costoTarifa;
+	    private float costoTarifa;
 	    private String tipoVehiculo;
 	    
-	    @OneToMany
-	    @JoinColumn(name = "tarifa_id")
-	    private Set<Ticket> ticket;
 
-		public Tarifa(int tarifaId, int costoTarifa, String tipoVehiculo) {
+
+		public Tarifa(int tarifaId, float costoTarifa, String tipoVehiculo) {
 			this.tarifaId = tarifaId;
 			this.costoTarifa = costoTarifa;
 			this.tipoVehiculo = tipoVehiculo;
@@ -45,11 +43,11 @@ public class Tarifa implements Serializable{
 			this.tarifaId = tarifaId;
 		}
 
-		public int getCostoTarifa() {
+		public float getCostoTarifa() {
 			return costoTarifa;
 		}
 
-		public void setCostoTarifa(int costoTarifa) {
+		public void setCostoTarifa(float costoTarifa) {
 			this.costoTarifa = costoTarifa;
 		}
 
@@ -61,18 +59,12 @@ public class Tarifa implements Serializable{
 			this.tipoVehiculo = tipoVehiculo;
 		}
 
-		public Set<Ticket> getTicket() {
-			return ticket;
-		}
 
-		public void setTicket(Set<Ticket> ticket) {
-			this.ticket = ticket;
-		}
 
 		@Override
 		public String toString() {
 			return "Tarifa [tarifaId=" + tarifaId + ", costoTarifa=" + costoTarifa + ", tipoVehiculo=" + tipoVehiculo
-					+ ", ticket=" + ticket + "]";
+					+ "]";
 		}
 		
 		
