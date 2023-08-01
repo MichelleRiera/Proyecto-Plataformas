@@ -23,6 +23,7 @@ public class Ticket implements Serializable{
     private Date fecha;
     private LocalTime hora_entrada;
     private LocalTime hora_salida;
+    private String estado;
     //relacion empleado da muchos tickets
     @OneToOne
     @JoinColumn(name = "usuarioid")
@@ -47,12 +48,13 @@ public class Ticket implements Serializable{
     
     
     
-	public Ticket(int ticketid, Date fecha, LocalTime hora_entrada, LocalTime hora_salida) {
+	public Ticket(int ticketid, Date fecha, LocalTime hora_entrada, LocalTime hora_salida,String estado) {
 
 		this.ticketid = ticketid;
 		this.fecha = fecha;
 		this.hora_entrada = hora_entrada;
 		this.hora_salida = hora_salida;
+		setEstado(estado); // Usa el método setter para asegurar la validación del campo "tipo"
 	}
 	public Ticket() {
 	}
@@ -107,6 +109,19 @@ public class Ticket implements Serializable{
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+	
+	public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        // Realiza una validación para permitir solo los valores "P" o "C" pendiente o cancelado
+        if (estado.equalsIgnoreCase("P") || estado.equalsIgnoreCase("C")) {
+            this.estado = estado;
+        } else {
+            throw new IllegalArgumentException("El estado debe ser 'P' o 'C'");
+        }
+    }
 	
 	@Override
 	public String toString() {

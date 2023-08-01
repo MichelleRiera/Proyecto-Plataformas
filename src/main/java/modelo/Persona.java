@@ -16,15 +16,16 @@ public class Persona implements Serializable {
     @Column(name = "personas_id")
     private int personaid;
 
-    private String cedula, nombre, telefono, direccion, tipo;
+    private String cedula, nombre, telefono, direccion, tipo,correo;
 
-    public Persona(int personaid, String cedula, String nombre,String telefono, String direccion,
+    public Persona(int personaid, String cedula, String nombre,String telefono, String direccion,String correo,
             String tipo) {
         this.personaid = personaid;
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.correo= correo;
         setTipo(tipo); // Usa el método setter para asegurar la validación del campo "tipo"
     }
 
@@ -72,6 +73,14 @@ public class Persona implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+    
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getTipo() {
