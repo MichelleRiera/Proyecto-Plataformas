@@ -8,7 +8,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import modelo.Ticket;
 import negocio.ticketN;
@@ -18,67 +20,57 @@ public class ticketS {
 	@Inject
 	private ticketN ticketNegocio;
 	
-	@GET
-    @Path("listarTickets")
-    @Produces("application/json")
-    public Response listarTickets() {
-        List<Ticket> listado = ticketNegocio.listarTickets();
-        return Response.status(Response.Status.OK).entity(listado).build();
-    }
+	 @POST
+	    @Path("registrar")
+	    @Consumes(MediaType.APPLICATION_JSON)
+	    @Produces(MediaType.APPLICATION_JSON)
+	    public Response registrarTicket(Ticket ticket) {
+	        try {
+	            ticketNegocio.registrarTicket(ticket, ticket.getUsuario().getUsuarioId(), ticket.getLugar().getLugarId(),
+	                    ticket.getVehiculo().getVehiculoId(), ticket.getTarifa().getTarifaId());
+	            return Response.status(Response.Status.CREATED).entity(ticket).build();
+	        } catch (Exception e) {
+	            return Response.status(Response.Status.BAD_REQUEST).entity("Error: " + e.getMessage()).build();
+	        }
+	    }
 
-    @POST
-    @Path("registrar")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public Response guardarTarifa(Ticket ticket) {
-        try {
-        	ticketNegocio.agregarTicket(ticket);
-            return Response.status(Response.Status.OK).entity(ticket).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Error error = new Error();
-            error.setCodigo(99);
-            error.setMensaje("Error al guardar el ticket: " + e.getMessage());
-            return Response.status(Response.Status.OK).entity(error).build();
-        }
-    }
+		 
+		    @DELETE
+		    @Path("eliminar/{ticketId}")
+		    @Produces(MediaType.APPLICATION_JSON)
+		    public Response eliminarTicket(@PathParam("ticketId") int ticketId) {
+	        try {
+	            ticketNegocio.eliminarTicketPorId(ticketId);
+	            return Response.status(Response.Status.OK).entity("Ticket eliminado correctamente.").build();
+	        } catch (Exception e) {
+	            return Response.status(Response.Status.BAD_REQUEST).entity("Error al eliminar el ticket: " + e.getMessage()).build();
+	        }
+	    }
 
-    @PUT
-    @Path("actualizar")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public Response actualizarTarifaPorId(Ticket ticket) {
-        try {
-        	ticketNegocio.actualizarTicket(ticket);
-            return Response.status(Response.Status.OK).entity(ticket).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Error respuesta = new Error();
-            respuesta.setCodigo(99);
-            respuesta.setMensaje("Error al actualizar la tarifa por ID: " + e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(respuesta).build();
-        }
-    }
 
-    @DELETE
-    @Path("eliminar")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public Response eliminarTarifaPorId(Ticket ticket) {
-        try {
-        	ticketNegocio.eliminarTicket(ticket.getTicketid());
-            Error respuesta = new Error();
-            respuesta.setCodigo(1);
-            respuesta.setMensaje("Tarifa eliminada correctamente.");
-            return Response.status(Response.Status.OK).entity(respuesta).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Error respuesta = new Error();
-            respuesta.setCodigo(99);
-            respuesta.setMensaje("Error al eliminar la tarifa por ID: " + e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(respuesta).build();
-        }
-    }
-	
+			 @PUT
+			 @Path("actualizar")
+			 @Consumes(MediaType.APPLICATION_JSON)
+			 @Produces(MediaType.APPLICATION_JSON)
+			 public Response actualizarTicket(Ticket ticketActualizado) {
+			     try {
+			         int ticketId = ticketActualizado.getTicketid();
+			         ticketNegocio.actualizarTicketPorId(ticketId, ticketActualizado);
+			         return Response.status(Response.Status.OK).entity("Ticket con ID " + ticketId + " actualizado correctamente.").build();
+			     } catch (Exception e) {
+			         return Response.status(Response.Status.BAD_REQUEST).entity("Error al actualizar el ticket: " + e.getMessage()).build();
+			     }
+			 }
 
-}
+
+	     @GET
+	     @Path("listarTickets")
+	     @Produces(MediaType.APPLICATION_JSON)
+	     public Response listarTodosLosTickets() {
+	         List<Ticket> listado = ticketNegocio.listarTickets();
+	         return Response.status(Response.Status.OK).entity(listado).build();
+	     }
+	 }
+
+
+
