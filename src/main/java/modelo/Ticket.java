@@ -2,7 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,28 +16,29 @@ import jakarta.persistence.OneToOne;
 public class Ticket implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ticket_id")
+	@Column(name = "ticketid")
 	private int ticketid;
     //private double costoTarifa;
     
     private Date fecha;
-    private  Time hora_entrada,hora_salida;
+    private LocalTime hora_entrada;
+    private LocalTime hora_salida;
     //relacion empleado da muchos tickets
     @OneToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuarioid")
     private Usuario usuario;
     //relacion tarifa 
     @OneToOne
-    @JoinColumn(name = "tarifa_id")
+    @JoinColumn(name = "tarifaid")
     private Tarifa tarifa;
     
     
     @OneToOne
-    @JoinColumn(name = "lugar_id")
+    @JoinColumn(name = "lugarid")
     private Lugar lugar;
     
     @OneToOne
-    @JoinColumn(name = "vehiculo_id")
+    @JoinColumn(name = "vehiculoid")
     private Vehiculo vehiculo;
     
     /*@OneToOne
@@ -46,7 +47,7 @@ public class Ticket implements Serializable{
     
     
     
-	public Ticket(int ticketid, Date fecha, Time hora_entrada, Time hora_salida) {
+	public Ticket(int ticketid, Date fecha, LocalTime hora_entrada, LocalTime hora_salida) {
 
 		this.ticketid = ticketid;
 		this.fecha = fecha;
@@ -67,18 +68,20 @@ public class Ticket implements Serializable{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Time getHora_entrada() {
-		return hora_entrada;
-	}
-	public void setHora_entrada(Time hora_entrada) {
-		this.hora_entrada = hora_entrada;
-	}
-	public Time getHora_salida() {
-		return hora_salida;
-	}
-	public void setHora_salida(Time hora_salida) {
-		this.hora_salida = hora_salida;
-	}
+	public LocalTime getHora_entrada() {
+        return hora_entrada;
+    }
+
+    public void setHora_entrada(LocalTime hora_entrada) {
+        this.hora_entrada = hora_entrada;
+    }
+    public LocalTime getHora_salida() {
+        return hora_salida;
+    }
+
+    public void setHora_salida(LocalTime hora_salida) {
+        this.hora_salida = hora_salida;
+    }
 	public Usuario getUsuario() {
 		return usuario;
 	}

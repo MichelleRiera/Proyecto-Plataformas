@@ -24,18 +24,15 @@ public class Lugar implements Serializable{
 	private int numeroLugar;
 	
 	private String estado;
+	private String tipoVehiculo;
 	private int piso;
 	
 
-	
-    @OneToMany
-	@JoinColumn(name = "tarifa_id")
-	private Set<Ticket> ticket;
-
-	public Lugar(int lugarId,int numeroLugar, String estado) {
+	public Lugar(int lugarId,int numeroLugar, String estado,String tipoVehiculo) {
 		this.lugarId = lugarId;
 		this.numeroLugar = numeroLugar;
 		this.estado = estado;
+		this.tipoVehiculo=tipoVehiculo;
 	}
 
 	public Lugar() {
@@ -66,14 +63,6 @@ public class Lugar implements Serializable{
 		this.estado = estado;
 	}
 
-	public Set<Ticket> getTicket() {
-		return ticket;
-	}
-
-	public void setTicket(Set<Ticket> ticket) {
-		this.ticket = ticket;
-	}
-
 	public int getPiso() {
 		return piso;
 	}
@@ -81,11 +70,20 @@ public class Lugar implements Serializable{
 	public void setPiso(int piso) {
 		this.piso = piso;
 	}
+	
+	public String getTipoVehiculo() {
+		return tipoVehiculo;
+	}
 
+	public void setTipoVehiculo(String tipoVehiculo) {
+		this.tipoVehiculo = tipoVehiculo;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Lugar [lugarId=" + lugarId + ", numeroLugar=" + numeroLugar + ", estado=" + estado + ", piso=" + piso
-				+ ", ticket=" + ticket + "]";
+				+ "]";
 	}
 
 	
