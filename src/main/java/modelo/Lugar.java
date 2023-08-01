@@ -24,10 +24,9 @@ public class Lugar implements Serializable{
 	private int numeroLugar;
 	
 	private String estado;
+	private int piso;
 	
-	@OneToOne
-    @JoinColumn(name = "Piso_id")
-    private Piso piso;
+
 	
     @OneToMany
 	@JoinColumn(name = "tarifa_id")
@@ -75,11 +74,11 @@ public class Lugar implements Serializable{
 		this.ticket = ticket;
 	}
 
-	public Piso getPiso() {
+	public int getPiso() {
 		return piso;
 	}
 
-	public void setPiso(Piso piso) {
+	public void setPiso(int piso) {
 		this.piso = piso;
 	}
 

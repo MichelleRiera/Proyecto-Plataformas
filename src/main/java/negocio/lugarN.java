@@ -1,9 +1,9 @@
 package negocio;
 
 import modelo.Lugar;
-import modelo.Piso;
+
 import DAO.lugarDao;
-import DAO.pisoDao;
+
 
 import java.util.List;
 
@@ -16,10 +16,9 @@ public class lugarN {
     @Inject
     private lugarDao lugarDao;
 
-    @Inject
-    private pisoDao pisoDao;
 
-    public void guardarLugar(Lugar lugar, int pisoId) {
+
+    public void guardarLugar(Lugar lugar) {
         if (lugar == null) {
             throw new IllegalArgumentException("El lugar no puede ser nulo.");
         }
@@ -30,12 +29,6 @@ public class lugarN {
             throw new IllegalArgumentException("El estado del lugar debe ser 'A' (activo) o 'I' (inactivo).");
         }
 
-        Piso piso = pisoDao.read(pisoId);
-        if (piso == null) {
-            throw new IllegalArgumentException("No se encontró el piso con el ID: " + pisoId);
-        }
-
-        lugar.setPiso(piso);
         lugarDao.insert(lugar);
     }
 

@@ -26,8 +26,7 @@ public class lugarS {
     @Produces("application/json")
     public Response guardarLugar(Lugar lugar) {
         try {
-            int pisoId = lugar.getPiso().getPisoId(); // Obtener el pisoId desde el lugar
-            lugarNegocio.guardarLugar(lugar, pisoId); // Pasar el lugar y el pisoId al negocio
+            lugarNegocio.guardarLugar(lugar); // Pasar el lugar y el pisoId al negocio
             return Response.status(Response.Status.OK).entity(lugar).build();
         } catch (Exception e) {
             e.printStackTrace();
