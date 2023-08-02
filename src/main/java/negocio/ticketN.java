@@ -87,6 +87,7 @@ public class ticketN {
 	        ticketExistente.setLugar(ticketActualizado.getLugar());
 	        ticketExistente.setVehiculo(ticketActualizado.getVehiculo());
 	        ticketExistente.setTarifa(ticketActualizado.getTarifa());
+	        ticketExistente.setEstado(ticketActualizado.getEstado());
 
 	        daoTicket.update(ticketExistente);
 	    }
