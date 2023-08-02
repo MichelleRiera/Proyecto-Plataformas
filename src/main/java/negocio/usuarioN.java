@@ -18,6 +18,8 @@ public class usuarioN {
 	    @Inject
 	    private personaDao daoPersona;
 
+	 // ...
+
 	    public void agregarUsuarioConIdPersona(Usuario usuario) throws Exception {
 	        if (usuario.getPersona() == null || usuario.getPersona().getPersonaid() == 0) {
 	            throw new Exception("El usuario debe tener una persona asociada con un id válido.");
@@ -28,13 +30,15 @@ public class usuarioN {
 	            throw new Exception("La persona con el id " + idPersona + " no existe.");
 	        }
 
+	        // Verificar si el nombre de usuario ya existe en la base de datos
 	        Usuario usuarioExistente = daoUsuario.getByNombreUsuario(usuario.getUsuario());
 	        if (usuarioExistente != null) {
-	            throw new Exception("El nombre de usuario ya está en uso.");
+	            throw new Exception("El nombre de usuario ya está registrado. Por favor, elija otro nombre de usuario.");
 	        }
 
 	        daoUsuario.insert(usuario);
 	    }
+	    // ...
 
 	    public void actualizarUsuarioPorNombreUsuario(Usuario usuario) throws Exception {
 	        if (usuario.getUsuario() == null || usuario.getUsuario().isEmpty()) {

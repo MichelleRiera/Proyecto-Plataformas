@@ -50,10 +50,12 @@ public class usuarioDao implements Serializable{
 	        Query query = em.createQuery(jpql);
 	        query.setParameter("nombreUsuario", nombreUsuario);
 
-	        try {
-	            return (Usuario) query.getSingleResult();
-	        } catch (EntityNotFoundException ex) {
+	        List<Usuario> resultados = query.getResultList();
+	        if (!resultados.isEmpty()) {
+	            return resultados.get(0);
+	        } else {
 	            return null;
 	        }
 	    }
+
 }    
