@@ -30,11 +30,11 @@ public class lugarN {
         }
 
         // Obtener la lista de lugares existentes con el mismo número de lugar y piso para el tipo de vehículo dado
-        List<Lugar> lugaresExistentes = lugarDao.getLugaresByNumeroLugarAndPisoAndTipoVehiculo(lugar.getNumeroLugar(), lugar.getPiso(), lugar.getTipoVehiculo());
+        List<Lugar> lugaresExistentes = lugarDao.getLugaresByNumeroLugarAndPisoAndTipoVehiculo(lugar.getNumeroLugar(), lugar.getPiso());
 
         // Validar si ya existe un lugar con el mismo número de lugar y piso para el tipo de vehículo dado
         if (!lugaresExistentes.isEmpty()) {
-            throw new IllegalArgumentException("Ya existe un lugar con el mismo número de lugar y piso para el tipo de vehículo: " + lugar.getTipoVehiculo());
+            throw new IllegalArgumentException("Ya existe un lugar con el mismo número de lugar y piso para el tipo de vehículo: " );
         }
 
         lugarDao.insert(lugar);
