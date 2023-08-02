@@ -1,7 +1,7 @@
 package negocio;
 
 import modelo.Lugar;
-
+import modelo.Ticket;
 import DAO.lugarDao;
 
 
@@ -59,14 +59,14 @@ public class lugarN {
         lugarDao.update(lugarExistente);
     }
 
-    public void eliminarLugarPorId(int lugarId) {
-        Lugar lugarExistente = lugarDao.read(lugarId);
-        if (lugarExistente == null) {
-            throw new IllegalArgumentException("No se encontró el lugar con el ID: " + lugarId);
+    public void eliminarLugarPorId(int lugarId) throws Exception {
+        Lugar lugar = lugarDao.read(lugarId);
+        if (lugar == null) {
+            throw new Exception("El ticket con el ID " + lugarId + " no existe.");
         }
-
         lugarDao.delete(lugarId);
     }
+
 
     public List<Lugar> listarLugares() {
         return lugarDao.getAll();

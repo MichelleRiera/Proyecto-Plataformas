@@ -11,8 +11,10 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import modelo.Lugar;
+import modelo.Persona;
 import negocio.lugarN;
 
 @Path("Lugares")
@@ -82,22 +84,27 @@ public class lugarS {
     }
 
     @DELETE
-    @Path("eliminar/{lugarId}")
+    @Path("eliminar")
+    @Consumes("application/json")
     @Produces("application/json")
-    public Response eliminarLugar(@PathParam("lugarId") int lugarId) {
+    public Response eliminarLugar(Lugar lugar) {
         try {
-            lugarNegocio.eliminarLugarPorId(lugarId);
+        	lugarNegocio.eliminarLugarPorId(lugar.getLugarId());
             Error respuesta = new Error();
             respuesta.setCodigo(1);
-            respuesta.setMensaje("Lugar eliminado correctamente.");
+            respuesta.setMensaje("Lugar eliminada correctamente.");
             return Response.status(Response.Status.OK).entity(respuesta).build();
         } catch (Exception e) {
             e.printStackTrace();
             Error respuesta = new Error();
             respuesta.setCodigo(99);
-            respuesta.setMensaje("Error al eliminar el lugar por ID: " + e.getMessage());
+            respuesta.setMensaje("Error al eliminar: " + e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(respuesta).build();
         }
     }
+
+
+
+
 
 }
