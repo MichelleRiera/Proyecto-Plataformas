@@ -19,7 +19,16 @@ public class vehiculoN {
 
    
 
-    public void guardarVehiculo(Vehiculo vehiculo) {
+	public void guardarVehiculo(Vehiculo vehiculo) {
+        // Verificar si ya existe un vehículo con la misma placa
+        Vehiculo vehiculoExistente = vehiculoDao.getByPlaca(vehiculo.getPlaca());
+
+        if (vehiculoExistente != null) {
+            // Si ya existe un vehículo con la misma placa, lanzar una excepción
+            throw new IllegalArgumentException("Ya existe un vehículo registrado con la placa: " + vehiculo.getPlaca());
+        }
+
+        // Si la placa no está registrada, procedemos a guardar el vehículo
         vehiculoDao.insert(vehiculo);
     }
 

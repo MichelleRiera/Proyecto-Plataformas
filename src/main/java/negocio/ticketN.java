@@ -50,6 +50,12 @@ public class ticketN {
 	        }
 	        ticket.setVehiculo(vehiculo);
 
+	        // Validar si el vehículo tiene un ticket en estado "P" (parqueado)
+	        Ticket ticketActivo = daoTicket.getTicketActivoPorVehiculo(vehiculoId);
+	        if (ticketActivo != null && ticketActivo.getEstado().equalsIgnoreCase("P")) {
+	            throw new Exception("El vehículo ya tiene un ticket activo en estado 'P'.");
+	        }
+
 	        Tarifa tarifa = daoTarifa.read(tarifaId);
 	        if (tarifa == null) {
 	            throw new Exception("La tarifa con el id " + tarifaId + " no existe.");
@@ -58,6 +64,7 @@ public class ticketN {
 
 	        daoTicket.insert(ticket);
 	    }
+
 	    
 	    public void eliminarTicketPorId(int ticketId) throws Exception {
 	        Ticket ticket = daoTicket.read(ticketId);
