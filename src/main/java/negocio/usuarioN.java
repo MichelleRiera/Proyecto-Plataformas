@@ -28,8 +28,14 @@ public class usuarioN {
 	            throw new Exception("La persona con el id " + idPersona + " no existe.");
 	        }
 
+	        Usuario usuarioExistente = daoUsuario.getByNombreUsuario(usuario.getUsuario());
+	        if (usuarioExistente != null) {
+	            throw new Exception("El nombre de usuario ya está en uso.");
+	        }
+
 	        daoUsuario.insert(usuario);
 	    }
+
 	    public void actualizarUsuarioPorNombreUsuario(Usuario usuario) throws Exception {
 	        if (usuario.getUsuario() == null || usuario.getUsuario().isEmpty()) {
 	            throw new Exception("Debe proporcionar un nombre de usuario válido para actualizar.");
