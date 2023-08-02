@@ -85,7 +85,7 @@ public class personaS {
     public Response actualizarClientePorCedula(Persona persona) {
         try {
             clientes.actualizarClientePorCedula(persona.getCedula(), persona.getNombre(), 
-            persona.getDireccion(), persona.getTelefono());
+            persona.getDireccion(), persona.getTelefono(),persona.getCorreo());
 
             return Response.status(Response.Status.OK).entity(persona).build();
         } catch (Exception e) {
