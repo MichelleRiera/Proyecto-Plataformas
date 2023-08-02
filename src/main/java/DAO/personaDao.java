@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import modelo.Persona;
 
 @Stateless
@@ -57,10 +58,17 @@ public class personaDao implements Serializable{
 	}
 	public Persona getByCedula(String cedula) {
 	    String jpql = "SELECT p FROM Persona p WHERE p.cedula = :cedula";
-	    Query query = em.createQuery(jpql);
+	    TypedQuery<Persona> query = em.createQuery(jpql, Persona.class);
 	    query.setParameter("cedula", cedula);
-	    return (Persona) query.getSingleResult();
+	    
+	    List<Persona> results = query.getResultList();
+	    if (results.isEmpty()) {
+	        return null; // Devolver null cuando no se encuentra ninguna persona
+	    } else {
+	        return results.get(0); // Devolver la primera persona encontrada
+	    }
 	}
+
 
      
 }

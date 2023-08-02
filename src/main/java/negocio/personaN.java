@@ -15,23 +15,22 @@ public class personaN {
 	 private personaDao daoPersona;
 	 
 	 public void guardarClientes(Persona persona) throws Exception {
-			if(!this.isCedulaValida(persona.getCedula()))
-				throw new Exception("Cedula incorrecta");
-			
-			if(daoPersona.read(persona.getPersonaid()) == null) {
-				try {
-					daoPersona.insert(persona);
-				}catch(Exception e) {
-					throw new Exception("Error al insertar: " + e.getMessage());
-				}
-			}else {
-				try {
-					daoPersona.update(persona);
-				}catch(Exception e) {
-					throw new Exception("Error al actualizar: " + e.getMessage());
-				}
-			}
+		    if (!this.isCedulaValida(persona.getCedula())) {
+		        throw new Exception("Cedula incorrecta");
+		    }
+
+		    Persona existingPerson = daoPersona.getByCedula(persona.getCedula());
+		    if (existingPerson != null) {
+		        throw new Exception("Ya existe una persona con la misma cedula");
+		    }
+
+		    try {
+		        daoPersona.insert(persona);
+		    } catch (Exception e) {
+		        throw new Exception("Error al insertar: " + e.getMessage());
+		    }
 		}
+
 
 	    public void guardarClientes(String cedula, String nombre, String apellido, String direccion, String telefono) {
 	        // Implementa la lógica para guardar un cliente utilizando los parámetros proporcionados
