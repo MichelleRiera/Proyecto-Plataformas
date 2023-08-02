@@ -60,8 +60,13 @@ public class Lugar implements Serializable{
 	}
 
 	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+        // Agrega una validación para asegurarte de que el estado solo pueda ser "A" o "I"
+        if ("A".equals(estado) || "I".equals(estado)) {
+            this.estado = estado;
+        } else {
+            throw new IllegalArgumentException("El estado debe ser 'A' (Activo) o 'I' (Inactivo).");
+        }
+    }
 
 	public int getPiso() {
 		return piso;

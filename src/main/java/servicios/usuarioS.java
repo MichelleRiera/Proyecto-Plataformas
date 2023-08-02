@@ -75,7 +75,7 @@ public class usuarioS {
     public Response actualizarUsuario(Usuario usuario) {
         try {
             negocioUsuario.actualizarUsuarioPorNombreUsuario(usuario);
-            return Response.status(Response.Status.OK).entity("Usuario actualizado exitosamente.").build();
+            return Response.status(Response.Status.OK).entity(usuario).build();
         } catch (Exception e) {
             e.printStackTrace();
             Error respuesta = new Error();

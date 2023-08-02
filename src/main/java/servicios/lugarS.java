@@ -26,7 +26,24 @@ public class lugarS {
     @Produces("application/json")
     public Response guardarLugar(Lugar lugar) {
         try {
-            lugarNegocio.guardarLugar(lugar); // Pasar el lugar y el pisoId al negocio
+            // Validar el lugar antes de guardar
+            if (lugar == null) {
+                throw new IllegalArgumentException("El lugar no puede ser nulo.");
+            }
+            if (lugar.getNumeroLugar() <= 0) {
+                throw new IllegalArgumentException("El número de lugar debe ser mayor que 0.");
+            }
+            if (lugar.getEstado() == null || lugar.getEstado().isEmpty() || (!lugar.getEstado().equals("A") && !lugar.getEstado().equals("I"))) {
+                throw new IllegalArgumentException("El estado del lugar debe ser 'A' (activo) o 'I' (inactivo).");
+            }
+            if (lugar.getPiso() <= 0) {
+                throw new IllegalArgumentException("El número de piso debe ser mayor que 0.");
+            }
+            if (lugar.getTipoVehiculo() == null || lugar.getTipoVehiculo().isEmpty()) {
+                throw new IllegalArgumentException("El tipo de vehículo no puede estar vacío.");
+            }
+
+            lugarNegocio.guardarLugar(lugar); // Pasar el lugar al negocio para validar y guardar
             return Response.status(Response.Status.OK).entity(lugar).build();
         } catch (Exception e) {
             e.printStackTrace();

@@ -42,6 +42,15 @@ public class lugarDao implements Serializable{
 		Query q = em.createQuery(jpql);
 		return q.getResultList();
 	}
+	public List<Lugar> getLugaresByNumeroLugarAndPisoAndTipoVehiculo(int numeroLugar, int piso, String tipoVehiculo) {
+	    String jpql = "SELECT p FROM Lugar p WHERE p.numeroLugar = :numeroLugar AND p.piso = :piso AND p.tipoVehiculo = :tipoVehiculo";
+	    Query q = em.createQuery(jpql);
+	    q.setParameter("numeroLugar", numeroLugar);
+	    q.setParameter("piso", piso);
+	    q.setParameter("tipoVehiculo", tipoVehiculo);
+	    return q.getResultList();
+	}
+
 
 
 

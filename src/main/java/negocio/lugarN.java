@@ -29,8 +29,17 @@ public class lugarN {
             throw new IllegalArgumentException("El estado del lugar debe ser 'A' (activo) o 'I' (inactivo).");
         }
 
+        // Obtener la lista de lugares existentes con el mismo número de lugar y piso para el tipo de vehículo dado
+        List<Lugar> lugaresExistentes = lugarDao.getLugaresByNumeroLugarAndPisoAndTipoVehiculo(lugar.getNumeroLugar(), lugar.getPiso(), lugar.getTipoVehiculo());
+
+        // Validar si ya existe un lugar con el mismo número de lugar y piso para el tipo de vehículo dado
+        if (!lugaresExistentes.isEmpty()) {
+            throw new IllegalArgumentException("Ya existe un lugar con el mismo número de lugar y piso para el tipo de vehículo: " + lugar.getTipoVehiculo());
+        }
+
         lugarDao.insert(lugar);
     }
+
 
     public void actualizarLugarPorId(int lugarId, int nuevoNumeroLugar, String nuevoEstado) {
         if (nuevoNumeroLugar <= 0) {
