@@ -22,12 +22,12 @@ public class Factura implements Serializable{
 	
 	private Date fecha;
 	private double iva,subtotal, total;
-	
+	//relacion muchos a uno con la tabla personas
 	@ManyToOne
     @JoinColumn(name = "personaid")
     private Persona persona;
 	
-	
+	//relacion de uno a uno con ticket
 	@OneToOne
     @JoinColumn(name = "ticketid")
     private Ticket ticket;

@@ -11,9 +11,8 @@ import jakarta.persistence.Id;
 @Entity
 public class Vehiculo implements Serializable{
 	
-	/**
-	 * 
-	 */
+	//Se genera el id automaticamente 
+
 	private static final long serialVersionUID = 1L;
 
 	@Id

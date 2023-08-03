@@ -19,7 +19,7 @@ public class usuarioN {
 	    private personaDao daoPersona;
 
 	 // ...
-
+       //agregar usuario pasando el parametro de la tabla persona
 	    public void agregarUsuarioConIdPersona(Usuario usuario) throws Exception {
 	        if (usuario.getPersona() == null || usuario.getPersona().getPersonaid() == 0) {
 	            throw new Exception("El usuario debe tener una persona asociada con un id válido.");
@@ -39,7 +39,7 @@ public class usuarioN {
 	        daoUsuario.insert(usuario);
 	    }
 	    // ...
-
+        //actualizar persona por nombre de usuario
 	    public void actualizarUsuarioPorNombreUsuario(Usuario usuario) throws Exception {
 	        if (usuario.getUsuario() == null || usuario.getUsuario().isEmpty()) {
 	            throw new Exception("Debe proporcionar un nombre de usuario válido para actualizar.");
@@ -59,7 +59,7 @@ public class usuarioN {
 	        daoUsuario.update(usuarioExistente);
 	    }
 
-
+	    	//eliminar persona por nombre de usuario
 	    public void eliminarUsuarioPorNombreUsuario(String nombreUsuario) throws Exception {
 	        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
 	            throw new Exception("Debe proporcionar un nombre de usuario válido para eliminar.");
@@ -73,11 +73,11 @@ public class usuarioN {
 
 	        daoUsuario.delete(usuarioExistente.getUsuarioId());
 	    }
-
+	    	//listar usuario
 	    public List<Usuario> listarUsuarios() {
 	        return daoUsuario.getAll();
 	    }
-	    
+	    //login de usuario validar usuario y contraseña
 	    public Usuario login(String nombreUsuario, String contrasenia) throws Exception {
 	        if (nombreUsuario == null || nombreUsuario.isEmpty() || contrasenia == null || contrasenia.isEmpty()) {
 	            throw new Exception("Debe proporcionar un nombre de usuario y una contraseña válida para iniciar sesión.");

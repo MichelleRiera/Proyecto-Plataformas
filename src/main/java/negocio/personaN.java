@@ -13,7 +13,7 @@ public class personaN {
 	
 	 @Inject
 	 private personaDao daoPersona;
-	 
+	 //guardar persona
 	 public void guardarClientes(Persona persona) throws Exception {
 		    if (!this.isCedulaValida(persona.getCedula())) {
 		        throw new Exception("Cedula incorrecta");
@@ -33,9 +33,8 @@ public class personaN {
 
 
 	    public void guardarClientes(String cedula, String nombre, String apellido, String direccion, String telefono) {
-	        // Implementa la lógica para guardar un cliente utilizando los parámetros proporcionados
 	    }
-
+         //validar cedula
 	    private boolean isCedulaValida(String cedula) {
 	        // Valida que la cédula tenga 10 dígitos
 	        if (cedula.length() != 10) {
@@ -51,15 +50,17 @@ public class personaN {
 
 	        return true;
 	    }
-
+        //listar personas
 	    public List<Persona> listarPersonas() {
 	        return daoPersona.getAll();
 	    }
-	    
+	    //eliminar persona por cedula
 	    public void delete(String cedula) {
 	        daoPersona.delete(cedula);
 	    }
-	    public void actualizarClientePorCedula(String cedula, String nombre,  String direccion, String telefono,String correo) throws Exception {
+	    //actualizar persona por cedula
+	    public void actualizarClientePorCedula(String cedula, String nombre,
+	    		String direccion, String telefono,String correo) throws Exception {
 	        if (!isCedulaValida(cedula)) {
 	            throw new Exception("Cedula incorrecta");
 	        }

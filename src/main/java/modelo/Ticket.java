@@ -33,19 +33,16 @@ public class Ticket implements Serializable{
     @JoinColumn(name = "tarifaid")
     private Tarifa tarifa;
     
-    
+    //relacion de uno a uno con lugar
     @OneToOne
     @JoinColumn(name = "lugarid")
     private Lugar lugar;
-    
+    //relacion de uno a uno con vehiculo
     @OneToOne
     @JoinColumn(name = "vehiculoid")
     private Vehiculo vehiculo;
     
-    /*@OneToOne
-    @JoinColumn(name = "factura_id")
-    private Factura factura;*/
-    
+   
     
     
 	public Ticket(int ticketid, Date fecha, LocalTime hora_entrada, LocalTime hora_salida,String estado) {

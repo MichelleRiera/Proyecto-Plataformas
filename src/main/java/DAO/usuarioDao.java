@@ -20,31 +20,31 @@ public class usuarioDao implements Serializable{
 
 	    @PersistenceContext
 	    private EntityManager em;
-
+           //insertar usuario
 	    public void insert(Usuario usuario) {
 	        em.persist(usuario);
 	    }
-
+	    //actualizar usuario
 	    public void update(Usuario usuario) {
 	        em.merge(usuario);
 	    }
-
+	    //leer por usuarioId
 	    public Usuario read(Integer UsuarioId) {
 	        Usuario p = em.find(Usuario.class, UsuarioId);
 	        return p;
 	    }
-
+	    //eliminar usuario
 	    public void delete(Integer UsuarioId) {
 	        Usuario p = em.find(Usuario.class, UsuarioId);
 	        em.remove(p);
 	    }
-
+	    	//listar usuarios
 	    public List<Usuario> getAll() {
 	        String jpql = "SELECT p FROM Usuario p";
 	        Query q = em.createQuery(jpql);
 	        return q.getResultList();
 	    }
-
+	    //buscar nombre de usuario si es que no se ha registrado antes
 	    public Usuario getByNombreUsuario(String nombreUsuario) {
 	        String jpql = "SELECT u FROM Usuario u WHERE u.usuario = :nombreUsuario";
 	        Query query = em.createQuery(jpql);

@@ -42,6 +42,7 @@ public class lugarDao implements Serializable{
 		Query q = em.createQuery(jpql);
 		return q.getResultList();
 	}
+	//buscar numero de lugar y numero de piso
 	public List<Lugar> getLugaresByNumeroLugarAndPisoAndTipoVehiculo(int numeroLugar, int piso) {
 	    String jpql = "SELECT p FROM Lugar p WHERE p.numeroLugar = :numeroLugar AND p.piso = :piso";
 	    Query q = em.createQuery(jpql);

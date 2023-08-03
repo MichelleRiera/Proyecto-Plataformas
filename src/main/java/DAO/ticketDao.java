@@ -42,6 +42,8 @@ public class ticketDao implements Serializable{
 		Query q = em.createQuery(jpql);
 		return q.getResultList();
 	}
+	
+	//buscar estado de vehiculo si esta P
 	public Ticket getTicketActivoPorVehiculo(int vehiculoId) {
 	    String jpql = "SELECT t FROM Ticket t WHERE t.vehiculo.vehiculoId = :vehiculoId AND t.estado = 'P'";
 	    Query query = em.createQuery(jpql);

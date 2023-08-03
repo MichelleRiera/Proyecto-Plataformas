@@ -17,7 +17,7 @@ public class lugarN {
     private lugarDao lugarDao;
 
 
-
+    //guardar lugar
     public void guardarLugar(Lugar lugar) {
         if (lugar == null) {
             throw new IllegalArgumentException("El lugar no puede ser nulo.");
@@ -40,7 +40,7 @@ public class lugarN {
         lugarDao.insert(lugar);
     }
 
-
+     //actualizar lugar por id
     public void actualizarLugarPorId(int lugarId, int nuevoNumeroLugar, String nuevoEstado) {
         if (nuevoNumeroLugar <= 0) {
             throw new IllegalArgumentException("El número de lugar debe ser mayor que 0.");
@@ -58,7 +58,7 @@ public class lugarN {
         lugarExistente.setEstado(nuevoEstado);
         lugarDao.update(lugarExistente);
     }
-
+    //eliminar lugar por id
     public void eliminarLugarPorId(int lugarId) throws Exception {
         Lugar lugar = lugarDao.read(lugarId);
         if (lugar == null) {
@@ -67,7 +67,7 @@ public class lugarN {
         lugarDao.delete(lugarId);
     }
 
-
+    //listar lugar por id
     public List<Lugar> listarLugares() {
         return lugarDao.getAll();
     }

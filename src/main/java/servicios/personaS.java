@@ -18,8 +18,7 @@ import negocio.personaN;
 @Path("Personas")
 public class personaS {
 	
-	@Inject 
-	private personaDao daoPersona;
+	
 	
 	@Inject
 	private personaN clientes;

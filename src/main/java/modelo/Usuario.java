@@ -12,6 +12,8 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Usuario implements Serializable{
+	
+	//se genera automatico el id
 	private static final long serialVersionUID= 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +24,7 @@ public class Usuario implements Serializable{
 	private String cargo, usuario, contrasenia;
 	
 	
-	//agregar relacion uno a uno
+	//agregar relacion uno a uno desde la tabla Persona
   	@OneToOne
   	@JoinColumn(name = "persona_id")
   	private Persona persona;

@@ -12,14 +12,14 @@ import DAO.tarifaDao;
 public class tarifaN {
 	    @Inject
 	    private tarifaDao tarifaDao;
-
+	    //guardar tarifa
 	    public void guardarTarifa(Tarifa tarifa) {
 	        if (tarifa == null) {
 	            throw new IllegalArgumentException("La tarifa no puede ser nula.");
 	        }
 	        tarifaDao.insert(tarifa);
 	    }
-
+	    	//actualizar tarifa por id
 	    public void actualizarTarifaPorId(int tarifaId, float nuevoCosto, String nuevoTipoVehiculo) {
 	        if (nuevoCosto <= 0) {
 	            throw new IllegalArgumentException("El costo de la tarifa debe ser mayor que cero.");
@@ -33,7 +33,7 @@ public class tarifaN {
 	            tarifaDao.update(tarifaExistente);
 	        }
 	    }
-
+	    //eliminar tarifa por id
 	    public void eliminarTarifaPorId(int tarifaId) {
 	        if (tarifaId <= 0) {
 	            throw new IllegalArgumentException("El ID de la tarifa debe ser mayor que cero.");
@@ -44,7 +44,7 @@ public class tarifaN {
 	        }
 	        tarifaDao.delete(tarifaId);
 	    }
-
+	    //listar tarifa
 	    public List<Tarifa> listarTarifas() {
 	        return tarifaDao.getAll();
 	    }

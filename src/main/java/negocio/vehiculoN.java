@@ -16,9 +16,7 @@ public class vehiculoN {
  
 	@Inject
     private vehiculoDao vehiculoDao;
-
-   
-
+	//guardar vehiculo
 	public void guardarVehiculo(Vehiculo vehiculo) {
         // Verificar si ya existe un vehículo con la misma placa
         Vehiculo vehiculoExistente = vehiculoDao.getByPlaca(vehiculo.getPlaca());
@@ -31,7 +29,7 @@ public class vehiculoN {
         // Si la placa no está registrada, procedemos a guardar el vehículo
         vehiculoDao.insert(vehiculo);
     }
-
+      //actualizar vehiculo por placa
     public void actualizarVehiculo(String placa, Vehiculo vehiculoActualizado) {
         Vehiculo vehiculoExistente = vehiculoDao.getByPlaca(placa);
 
@@ -53,7 +51,7 @@ public class vehiculoN {
         }
     }
 
-
+    //eliminar vehiculo por placa
     public void eliminarVehiculoPorPlaca(String placa) {
         List<Vehiculo> vehiculos = vehiculoDao.getAll();
         boolean encontrado = false;
@@ -69,7 +67,7 @@ public class vehiculoN {
             throw new IllegalArgumentException("No se encontró ningún vehículo con la placa: " + placa);
         }
     }
-
+     //listar vehiculos
     public List<Vehiculo> listarVehiculos() {
         return vehiculoDao.getAll();
     }

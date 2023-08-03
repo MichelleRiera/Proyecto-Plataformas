@@ -21,30 +21,31 @@ public class vehiculoDao implements Serializable{
 	
 	@PersistenceContext
 	private EntityManager em;
-	
+	//insertar vehiculo
 	public void insert(Vehiculo vehiculo) {
 		em.persist(vehiculo);
 	}
-	
+	//actualizar vehiculo
 	public void update(Vehiculo vehiculo) {
 		em.merge(vehiculo);
 	}
-	
+	//leer por vehiculoId
 	public Vehiculo read(int vehiculoId) {
 		Vehiculo p = em.find(Vehiculo.class, vehiculoId);
 		return p;
 	}
-	
+	//delete por vehiculoid
 	public void delete(int vehiculoId) {
 		Vehiculo p = em.find(Vehiculo.class, vehiculoId);
 		em.remove(p);
 	}
-	
+	//listar vehiculos
 	public List<Vehiculo> getAll(){
 		String jpql = "SELECT p FROM Vehiculo p";
 		Query q = em.createQuery(jpql);
 		return q.getResultList();
 	}
+	//buscar por placa de vehiculo si es que no se registrado antes
 	public Vehiculo getByPlaca(String placa) {
 	    String jpql = "SELECT v FROM Vehiculo v WHERE v.placa = :placa";
 	    Query q = em.createQuery(jpql);

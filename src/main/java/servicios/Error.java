@@ -1,6 +1,8 @@
 package servicios;
 
 public class Error {
+	
+	//para enviar los mensajes de error en los servicios
 	private int codigo;
 	private String mensaje;
 	public int getCodigo() {

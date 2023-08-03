@@ -22,7 +22,7 @@ public class facturaN {
 	
 	@Inject
     private personaDao daoPersona;
-	
+	//registrar factura
 	public void registrarFactura(Factura factura, int personaId, int ticketId) throws Exception {
         Persona persona = daoPersona.read(personaId);
         if (persona == null) {
@@ -38,7 +38,7 @@ public class facturaN {
 
         daoFactura.insert(factura);
     }
-	
+	//eliminar factura por id
 	public void eliminarFacturaPorId(int facturaId) throws Exception {
         Factura factura = daoFactura.read(facturaId);
         if (factura == null) {
@@ -46,7 +46,7 @@ public class facturaN {
         }
         daoFactura.delete(facturaId);
     }
-	
+	//actualizar factura
 	public void actualizarFacturaPorId(int facturaId, Factura facturaActualizada) throws Exception {
         Factura facturaExistente = daoFactura.read(facturaId);
         if (facturaExistente == null) {
@@ -63,7 +63,7 @@ public class facturaN {
 
         daoFactura.update(facturaExistente);
     }
-	
+	//listar factura
 	public List<Factura> listarFacturas() {
         return daoFactura.getAll();
     }

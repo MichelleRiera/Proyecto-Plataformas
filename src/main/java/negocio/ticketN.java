@@ -30,7 +30,7 @@ public class ticketN {
 
 	    @Inject
 	    private tarifaDao daoTarifa;
-
+	    //registrar ticket
 	    public void registrarTicket(Ticket ticket, int usuarioId, int lugarId, int vehiculoId, int tarifaId) throws Exception {
 	        Usuario usuario = daoUsuario.read(usuarioId);
 	        if (usuario == null) {
@@ -65,7 +65,7 @@ public class ticketN {
 	        daoTicket.insert(ticket);
 	    }
 
-	    
+	    //eliminar ticket por id
 	    public void eliminarTicketPorId(int ticketId) throws Exception {
 	        Ticket ticket = daoTicket.read(ticketId);
 	        if (ticket == null) {
@@ -73,6 +73,7 @@ public class ticketN {
 	        }
 	        daoTicket.delete(ticketId);
 	    }
+	    //actualizar ticket por id
 	    public void actualizarTicketPorId(int ticketId, Ticket ticketActualizado) throws Exception {
 	        Ticket ticketExistente = daoTicket.read(ticketId);
 	        if (ticketExistente == null) {
@@ -91,7 +92,7 @@ public class ticketN {
 
 	        daoTicket.update(ticketExistente);
 	    }
-	    
+	    //listar ticket 
 	    public List<Ticket> listarTickets() {
 	        return daoTicket.getAll();
 	    }
