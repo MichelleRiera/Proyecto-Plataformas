@@ -1,6 +1,8 @@
 package negocio;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import DAO.personaDao;
 import jakarta.ejb.Stateless;
@@ -17,6 +19,10 @@ public class personaN {
 	 public void guardarClientes(Persona persona) throws Exception {
 		    if (!this.isCedulaValida(persona.getCedula())) {
 		        throw new Exception("Cedula incorrecta");
+		    }
+		    
+		    if (!this.isCorreoValido(persona.getCorreo())) {
+		        throw new Exception("Correo incorrecto");
 		    }
 
 		    Persona existingPerson = daoPersona.getByCedula(persona.getCedula());
@@ -50,6 +56,16 @@ public class personaN {
 
 	        return true;
 	    }
+	    //Validar Correo
+	    private boolean isCorreoValido(String correo) {
+	        // Patrón para validar el correo electrónico
+	        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+
+	        Pattern pattern = Pattern.compile(emailPattern);
+	        Matcher matcher = pattern.matcher(correo);
+
+	        return matcher.matches();
+	    }
         //listar personas
 	    public List<Persona> listarPersonas() {
 	        return daoPersona.getAll();
@@ -65,6 +81,9 @@ public class personaN {
 	            throw new Exception("Cedula incorrecta");
 	        }
 
+	        if (!this.isCorreoValido(correo)) {
+		        throw new Exception("Correo incorrecto");
+		    }
 	        Persona personaExistente = daoPersona.getByCedula(cedula);
 	        if (personaExistente == null) {
 	            throw new EntityNotFoundException("No existe una persona con la cédula proporcionada.");
